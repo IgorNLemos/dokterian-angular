@@ -1,0 +1,3596 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "loginDataInterface",
+            "id": "interface-loginDataInterface-1c3e39a6824455c0601e5ddf3c8f4c2fb7620cfef73b48772d2e5f651562599acbcd00e225ac993d48cc2dbf47d4aaf67f8d0db82ddc3b193ecb91196320494b",
+            "file": "src/app/pages/login/login.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { AuthService } from 'src/app/services/auth.service';\n\ninterface loginDataInterface {\n  username: string;\n  password: string;\n}\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss'],\n})\nexport class LoginComponent {\n  loginForm: FormGroup;\n  loginData: loginDataInterface;\n\n  constructor(\n    private fb: FormBuilder,\n    private authService: AuthService,\n    private router: Router\n  ) {\n    this.loginForm = this.fb.group({\n      user: ['', [Validators.required, Validators.minLength(3)]],\n      password: ['', [Validators.required]],\n    });\n\n  }\n\n  login() {\n    if (this.loginForm.invalid) {\n      this.loginForm.markAllAsTouched();\n      return;\n    }\n\n    const { user, password } = this.loginForm.value;\n\n    if (this.authService.validateCredentials(user, password)) {\n      this.router.navigate(['/admin-center']); // Navigate to the admin-center page\n    } else {\n      alert('Username or Password is incorrect!');\n    }\n  }\n\n  erase() {\n    this.loginForm.reset();\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "password",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "username",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "loginFormInterface",
+            "id": "interface-loginFormInterface-e91332875e428e1d6e35b79c423798831ac7a41bf33fcc341256cd12af81e48d5720313e8f9329dbab1595d15ba960db0b5026dc54cc24dc9a1dad2f13716b4e",
+            "file": "src/app/customers/customers-form/customers-form.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\n\ninterface loginFormInterface {\n  nome: string;\n  senha: string;\n  dataNascimento: any | null;\n}\n\n@Component({\n  selector: 'app-customers-form',\n  templateUrl: './customers-form.component.html',\n  styleUrls: ['./customers-form.component.scss']\n})\nexport class CustomersFormComponent {\n\n  customerForm: FormGroup;\n\n  customerLogin: loginFormInterface\n\n  constructor (private fb: FormBuilder) {\n\n    this.customerForm = this.fb.group({\n      nome: ['',[Validators.required, Validators.minLength(3)]],\n      cpf: ['',[Validators.required, Validators.pattern(/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/)]],\n      dataNascimento: ['', Validators.required],\n      sexo: ['', Validators.required]\n    })\n\n    this.customerLogin = {\n      nome:'',\n      senha:'',\n      dataNascimento: null,\n    }\n  }\n\n  onSubmit () {}\n}\n",
+            "properties": [
+                {
+                    "name": "dataNascimento",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "nome",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "senha",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "menuItemInterface",
+            "id": "interface-menuItemInterface-265da087f9438e03690121f1add4a4ff1692ff00b049eef8a3d8aa86ea13c361362e27dc6ad8f52e47dbfae60919f39c18fbcf997ccbf22466709f435591ca86",
+            "file": "src/app/shared/components/side-menu/side-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Router } from '@angular/router';\n\ninterface menuItemInterface {\n  label: string;\n  routerLink: string;\n  routerLinkActive: string,\n  ariaCurrentWhenActive: string\n}\n\n@Component({\n  selector: 'app-side-menu',\n  templateUrl: './side-menu.component.html',\n  styleUrls: ['./side-menu.component.scss']\n})\nexport class SideMenuComponent {\n\n  @Input() menuItems: menuItemInterface[] = []\n\n  constructor() {}\n}\n",
+            "properties": [
+                {
+                    "name": "ariaCurrentWhenActive",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "routerLink",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "routerLinkActive",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "User",
+            "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
+            "file": "src/stories/user.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {\n  name: string;\n}\n",
+            "properties": [
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "AuthService",
+            "id": "injectable-AuthService-dfabe9b0a46ae9b61193921f2dae5b5d026c829dc81cfd86459f143cb50bade477fe7c0ddef16fe0f8f0bf6ffb6335fd8af47e13996ae174e722b29f7cda9131",
+            "file": "src/app/services/auth.service.ts",
+            "properties": [
+                {
+                    "name": "authenticated",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "mockPassword",
+                    "defaultValue": "'password123'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "mockUsername",
+                    "defaultValue": "'admin'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "isLoggedIn",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "logout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "validateCredentials",
+                    "args": [
+                        {
+                            "name": "username",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "username",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "password",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class AuthService {\n  private authenticated = false;\n\n  // Mock login credentials\n  private readonly mockUsername = 'admin';\n  private readonly mockPassword = 'password123';\n\n  // Method to validate login credentials\n  validateCredentials(username: string, password: string): boolean {\n    if (username === this.mockUsername && password === this.mockPassword) {\n      this.authenticated = true;\n      return true;\n    }\n    return false;\n  }\n\n  logout() {\n    this.authenticated = false;\n  }\n\n  isLoggedIn(): boolean {\n    return this.authenticated;\n  }\n}\n",
+            "extends": [],
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [
+        {
+            "name": "CpfMaskDirective",
+            "id": "directive-CpfMaskDirective-5ee7c6fbab1e0e72fab99cf40dcefd2152ff9ddbcd55d62bb70150dbc45faedf4182def5aa64565153260d57ef5feb6b518a9205d74fc8f9ec07d26f54dead42",
+            "file": "src/app/shared/directives/cpf-mask.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive, HostListener, ElementRef } from '@angular/core';\n\n@Directive({\n  selector: '[appCpfMask]'\n})\nexport class CpfMaskDirective {\n  constructor(private el: ElementRef) {}\n\n  @HostListener('input', ['$event'])\n  onInput(event: InputEvent): void {\n    // Obtém o valor do input\n    const input = this.el.nativeElement.value;\n\n    // Remove todos os caracteres não numéricos\n    const numericValue = input.replace(/\\D/g, '');\n\n    // Formata o CPF\n    const formattedValue = this.formatCpf(numericValue);\n\n    // Atualiza o valor do campo\n    this.el.nativeElement.value = formattedValue;\n  }\n\n  private formatCpf(value: string): string {\n    // Adiciona os pontos e traço conforme o comprimento\n    if (value.length <= 3) {\n      return value;\n    } else if (value.length <= 6) {\n      return `${value.substring(0, 3)}.${value.substring(3, 6)}`;\n    } else if (value.length <= 9) {\n      return `${value.substring(0, 3)}.${value.substring(3, 6)}.${value.substring(6, 9)}`;\n    } else {\n      return `${value.substring(0, 3)}.${value.substring(3, 6)}.${value.substring(6, 9)}-${value.substring(9, 11)}`;\n    }\n  }\n}\n",
+            "selector": "[appCpfMask]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": false,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "input",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "InputEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "formatCpf",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onInput",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "InputEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 10,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'input', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "InputEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "el",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 6,
+                "jsdoctags": [
+                    {
+                        "name": "el",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "components": [
+        {
+            "name": "AlertComponent",
+            "id": "component-AlertComponent-f91832bb53500f5846b0d94895f2027bd1fc4d3f24f0cbf47b5f2743ef773a3bbea34d802bbbb215862b0ba22afcef77c0810cb3402acc5c34a26c35438e0bad",
+            "file": "src/app/shared/components/alert/alert.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-alert",
+            "styleUrls": [
+                "./alert.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./alert.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-alert',\n  templateUrl: './alert.component.html',\n  styleUrls: ['./alert.component.scss']\n})\nexport class AlertComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./alert.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>alert works!</p>\n"
+        },
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-69cabae3950fd712c86d63fb65c20ec8a279c78a3264e4054235c74a7e0a28745a08c2e87a4ee46988bbf20a51869883bccb33a7fa384dff9baf6d8937670b18",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [
+                "./app.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "'Customers-Management'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'Customers-Management';\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./app.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<router-outlet></router-outlet>\n\n"
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-d7bf0323e6da130e2609e2af0117b4a8d7cd874132206af50bf43dfc37044485fe50f2867ea76525730dd195b9b95a43802a12dadc6ad5cd7bf2faa07f19f0da",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": " <button  type=\"button\"\n  (click)=\"onClick.emit($event)\"\n  [ngClass]=\"classes\"\n  [ngStyle]=\"{ 'background-color': backgroundColor }\"\n>\n  {{ label }}\n</button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nWhat background color to use",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 25,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 760,
+                            "end": 773,
+                            "kind": 327,
+                            "id": 0,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "tagName": {
+                                "pos": 761,
+                                "end": 769,
+                                "kind": 80,
+                                "id": 0,
+                                "flags": 16842752,
+                                "transformFlags": 0,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "\n\nButton contents\n\n",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nIs this the principal call to action on the page?",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 21,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nHow large should the button be?",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 29,
+                    "type": "\"small\" | \"medium\" | \"large\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nOptional click handler",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 41,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  standalone: true,\n  imports: [CommonModule],\n  template: ` <button\n  type=\"button\"\n  (click)=\"onClick.emit($event)\"\n  [ngClass]=\"classes\"\n  [ngStyle]=\"{ 'background-color': backgroundColor }\"\n>\n  {{ label }}\n</button>`,\n  styleUrls: ['./button.css'],\n})\nexport class ButtonComponent {\n  /** Is this the principal call to action on the page? */\n  @Input()\n  primary = false;\n\n  /** What background color to use */\n  @Input()\n  backgroundColor?: string;\n\n  /** How large should the button be? */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /** Optional click handler */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  display: inline-block;\n  cursor: pointer;\n  border: 0;\n  border-radius: 3em;\n  font-weight: 700;\n  line-height: 1;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n.storybook-button--primary {\n  background-color: #555ab9;\n  color: white;\n}\n.storybook-button--secondary {\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n  background-color: transparent;\n  color: #333;\n}\n.storybook-button--small {\n  padding: 10px 16px;\n  font-size: 12px;\n}\n.storybook-button--medium {\n  padding: 11px 20px;\n  font-size: 14px;\n}\n.storybook-button--large {\n  padding: 12px 24px;\n  font-size: 16px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 43
+                    }
+                }
+            }
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-0a4f8aec7436c074e5f11e4f01f06d1e93e5893f6308d0d8fafb134e917b03f0ed84e0016bdda6afc76b47d169ca3bb4c074b7b7a9ea2bba7c4c39f63a8a9f2a-1",
+            "file": "src/app/shared/components/button/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-button",
+            "styleUrls": [
+                "./button.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "color",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent {\n  @Input() class: string;\n  @Input() label: string;\n  @Input() color: string;\n  @Input() type: string;\n  @Input() disabled:boolean;\n\n  constructor () {}\n}\n\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "button {\n  padding: 16px 32px 16px 32px;\n  border-radius: 100px;\n  border: none;\n  font-family: 'Poppins';\n  font-size: 18px;\n  font-weight: 500;\n  line-height: 13.2px;\n\n  &.primary {\n    background: rgba(99, 180, 255, 0.1);\n    color: rgba(72, 148, 254, 1);\n  }\n\n  &.secondary {\n    color: rgba(134, 150, 187, 1);\n    background: rgba(250, 250, 250, 1);\n  }\n}\n",
+                    "styleUrl": "./button.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 13
+            },
+            "extends": [],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "ButtonComponent-1",
+            "templateData": "<button [ngClass]=\"class\" [disabled]=\"disabled\" [type]=\"type\">{{ label }}</button>\n"
+        },
+        {
+            "name": "CardComponent",
+            "id": "component-CardComponent-f47dee4ab01a3bb1eb5363f679cbe3d0a4bd996238fe7217ef937db9dbc3784cf7e508e92480a4b1f6d7ea7d234a5e4e6ec52f4a80db8a7453762a9768fd4b1f",
+            "file": "src/app/shared/components/card/card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-card",
+            "styleUrls": [
+                "./card.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./card.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "cardPictureSrc",
+                    "defaultValue": "'assets/Frame.svg'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "leftCardIconLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "leftCardIconName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "rightCardIconLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "rightCardIconName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "speciality",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "upRightCardIcon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "upRightCardLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-card',\n  templateUrl: './card.component.html',\n  styleUrls: ['./card.component.scss']\n})\nexport class CardComponent {\n  @Input() class: string;\n  @Input() cardPictureSrc: string = 'assets/Frame.svg';\n  @Input() name: string = '';\n  @Input() speciality: string = '';\n  @Input() upRightCardIcon: string;\n  @Input() upRightCardLabel: string | null;\n  @Input() leftCardIconName: string;\n  @Input() rightCardIconName: string;\n  @Input() leftCardIconLabel: string;\n  @Input() rightCardIconLabel: string;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".app-card {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 10px;\n  border-radius: 12px;\n  gap: 6px;\n\n  .id-container {\n    display: flex;\n    align-items: center;\n    margin-right: 0px;\n    width: 100%;\n    gap: 8px;\n\n    .name{\n      padding: 10px 0px 0px 0px;\n      font-family: 'Poppins';\n      font-size: 16px;\n      font-weight: 700;\n      line-height: 17.6px;\n      text-align: left;\n    }\n\n    .speciality {\n      font-family: 'Poppins';\n      font-size: 14px;\n      font-weight: 400;\n      line-height: 21px;\n      text-align: left;\n    }\n\n    .up-right-card-icon {\n      font-family: 'Poppins';\n      font-size: 12px;\n      font-weight: 400;\n    }\n  }\n\n  hr {\n    width: auto;\n    height: 0px;\n    border: 1px;\n  }\n\n  img {\n    object-fit: cover;\n    width: 66px;\n    height: 66px;\n    border-radius: 40px;\n  }\n\n  .pic-bg {\n    height: 66px;\n    border-radius: 40px;\n    background: #e4e4e4;\n    align-content:center\n  }\n}\n\n.card--next-appointment {\n  background-color: #4894FE;\n\n  .name{\n    color: #FFFFFF;\n  }\n\n  .speciality {\n    color: #CBE1FF;\n  }\n\n  hr {\n    border: 1px solid #FFFFFF26\n  }\n\n  .up-right-card-icon {\n    color: #FFFFFF;\n    margin-left: auto;\n  }\n\n  .down-left-card-icon {\n    color: #FFFFFF;\n  }\n\n  .down-right-card-icon {\n    color: #FFFFFF;\n  }\n}\n\n.card--next-available-spot {\n  background-color: #FFFFFF;\n\n\n  .name{\n    color: #0D1B34;\n  }\n\n  .speciality {\n    color: #8696BB;\n  }\n\n  hr {\n    border: 1px solid #d0d0d0\n  }\n\n  .up-right-card-icon {\n    color: #8696BB;\n    margin-left: 15px;\n  }\n\n  .down-left-card-icon {\n    color: #FEB052;\n  }\n\n  .down-right-card-icon {\n    color: #4894FE;\n  }\n}\n\n\n\n",
+                    "styleUrl": "./card.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div [class]=\"class\">\n  <div class=\" d-flex justify-content-around align-items-center gap-1\">\n    <div class=\"id-container\">\n      <div class=\"pic-bg\">\n        <img [src]=\"cardPictureSrc\">\n      </div>\n      <div class=\"ident-text\">\n        <div class=\"name\">{{ name }}</div>\n        <div class=\"speciality\">{{ speciality }}</div>\n      </div>\n      <span class=\"up-right-card-icon d-flex align-items-center gap-1\">\n        <app-icon [name]=\"upRightCardIcon\" size=\"18\"></app-icon>\n        {{ upRightCardLabel }}\n      </span>\n    </div>\n  </div>\n  <hr>\n  <div class=\"d-flex justify-content-around text-white\">\n    <div class=\"down-left-card-icon d-flex align-items-center gap-1 date\">\n      <app-icon [name]=\"leftCardIconName\" size=\"18\"></app-icon>\n      {{ leftCardIconLabel }}\n    </div>\n    <div class=\"down-right-card-icon d-flex align-items-center gap-1\">\n      <app-icon [name]=\"rightCardIconName\" size=\"18\"></app-icon>\n      {{ rightCardIconLabel }}\n    </div>\n  </div>\n</div>\n\n"
+        },
+        {
+            "name": "CustomersComponent",
+            "id": "component-CustomersComponent-18ba91cff54e334c265883c2ebe876399df04db85cbf7d920328c4438e97ffb07772e30c5159a4141630715623c672465bdcbf19c24002c2c69d408a5bdea2b0",
+            "file": "src/app/customers/customers.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-customers",
+            "styleUrls": [
+                "./customers.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./customers.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-customers',\n  templateUrl: './customers.component.html',\n  styleUrls: ['./customers.component.scss']\n})\nexport class CustomersComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./customers.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>customers works!</p>\n"
+        },
+        {
+            "name": "CustomersFormComponent",
+            "id": "component-CustomersFormComponent-e91332875e428e1d6e35b79c423798831ac7a41bf33fcc341256cd12af81e48d5720313e8f9329dbab1595d15ba960db0b5026dc54cc24dc9a1dad2f13716b4e",
+            "file": "src/app/customers/customers-form/customers-form.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-customers-form",
+            "styleUrls": [
+                "./customers-form.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./customers-form.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "customerForm",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "customerLogin",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "loginFormInterface",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onSubmit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\n\ninterface loginFormInterface {\n  nome: string;\n  senha: string;\n  dataNascimento: any | null;\n}\n\n@Component({\n  selector: 'app-customers-form',\n  templateUrl: './customers-form.component.html',\n  styleUrls: ['./customers-form.component.scss']\n})\nexport class CustomersFormComponent {\n\n  customerForm: FormGroup;\n\n  customerLogin: loginFormInterface\n\n  constructor (private fb: FormBuilder) {\n\n    this.customerForm = this.fb.group({\n      nome: ['',[Validators.required, Validators.minLength(3)]],\n      cpf: ['',[Validators.required, Validators.pattern(/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/)]],\n      dataNascimento: ['', Validators.required],\n      sexo: ['', Validators.required]\n    })\n\n    this.customerLogin = {\n      nome:'',\n      senha:'',\n      dataNascimento: null,\n    }\n  }\n\n  onSubmit () {}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "mat-card {\n  height: 100vh;\n  vertical-align: center;\n  text-align: center;\n}\n\n\nform {\n  display:flex;\n  flex-direction: column;\n  gap: 5px;\n}\n",
+                    "styleUrl": "./customers-form.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 19,
+                "jsdoctags": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "templateData": "<mat-card>\n    <mat-card-title>Cadastro de Cliente</mat-card-title>\n    <mat-card-content>\n        <form [formGroup]=\"customerForm\" (ngSubmit)=\"onSubmit()\">\n            <mat-form-field appearance=\"fill\" class=\"full=width\">\n                <mat-label>Nome</mat-label>\n                <input matInput formControlName=\"nome\" placeholder=\"Digite o nome\">\n                <mat-error *ngIf=\"customerForm.get('nome')?.invalid\">\n                    Nome é obrigatório e deve ter pelo menos 3 caracteres.\n                </mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"fill\" class=\"full=width\">\n                <mat-label>CPF</mat-label>\n                <input matInput appCpfMask formControlName=\"cpf\" placeholder=\"Digite o CPF\">\n                <mat-error *ngIf=\"customerForm.get('cpf')?.invalid\">\n                    CPF deve conter 11 dígitos numéricos.\n                </mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"fill\" class=\"full=width\">\n                <mat-label>Data de Nascimento</mat-label>\n                <input matInput [matDatepicker]=\"picker\" formControlName=\"dataNascimento\">\n                <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n                <mat-datepicker #picker></mat-datepicker>\n                <mat-error *ngIf=\"customerForm.get('dataNascimento')?.invalid\">\n                    Data de nascimento é obrigatória.\n                </mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"fill\" class=\"full=width\">\n                <mat-label>Sexo</mat-label>\n                <mat-select formControlName=\"sexo\">\n                    <mat-option value=\"masculino\">Masculino</mat-option>\n                    <mat-option value=\"feminino\">Feminino</mat-option>\n                    <mat-option value=\"outro\">Outro</mat-option>\n                </mat-select>\n                <mat-error *ngIf=\"customerForm.get('sexo')?.invalid\">\n                    Sexo é obrigatório.\n                </mat-error>\n            </mat-form-field>\n\n            <button mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"customerForm.invalid\">Cadastrar</button>\n        </form>\n    </mat-card-content>\n</mat-card>\n"
+        },
+        {
+            "name": "DashboardComponent",
+            "id": "component-DashboardComponent-9ab2715c8b1760cd09ac0f2fd554ae24ed918726ff3a2e4c411eb3a33212fa5208d62f1d85a4af9496cb94ebb99089919519d83d6166ac8e9a1ea4032802689d",
+            "file": "src/app/pages/dashboard/dashboard.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-dashboard",
+            "styleUrls": [
+                "./dashboard.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./dashboard.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "activeItem",
+                    "defaultValue": "'home'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "fabCardItems",
+                    "defaultValue": "[\n    { name: 'biohazard', label: 'Covid 19' },\n    { name: 'briefcase-medical', label: 'Doctor' },\n    { name: 'pill', label: 'Medicine' },\n    { name: 'hospital', label: 'Hospital' },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "footerMenuItems",
+                    "defaultValue": "[\n    { name: 'home', icon: 'house', label: 'Home', link: '/home' },\n    { name: 'schedule', icon: 'calendar-search', label: 'Schedule', link: '/schedule' },\n    { name: 'messages', icon: 'message-square-text', label: 'Messages', link: '/messages' },\n    { name: 'profile', icon: 'circle-user-round', label: 'Profile', link: '/user-profile' },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-dashboard',\n  templateUrl: './dashboard.component.html',\n  styleUrls: ['./dashboard.component.scss']\n})\nexport class DashboardComponent {\n  activeItem: string = 'home';\n\n  footerMenuItems = [\n    { name: 'home', icon: 'house', label: 'Home', link: '/home' },\n    { name: 'schedule', icon: 'calendar-search', label: 'Schedule', link: '/schedule' },\n    { name: 'messages', icon: 'message-square-text', label: 'Messages', link: '/messages' },\n    { name: 'profile', icon: 'circle-user-round', label: 'Profile', link: '/user-profile' },\n  ];\n  fabCardItems = [\n    { name: 'biohazard', label: 'Covid 19' },\n    { name: 'briefcase-medical', label: 'Doctor' },\n    { name: 'pill', label: 'Medicine' },\n    { name: 'hospital', label: 'Hospital' },\n  ];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".container {\n  padding: 20px;\n  width: 100vw;\n  gap: 24px;\n}\n\n::ng-deep mat-form-field {\n  margin-bottom: 0 !important;\n}\n\n::ng-deep .mat-mdc-text-field-wrapper {\n  background: #FAFAFA !important;\n  border-radius: 10px !important;\n  border:0;\n  box-shadow: none;\n}\n\n::ng-deep .mat-mdc-form-field-bottom-align::before {\n  display: none !important;\n}\n\n::ng-deep .mdc-line-ripple::before, .mdc-line-ripple::after {\n  border: 0 !important;\n}\n\nh3 {\n  font-family: \"Poppins\";\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 17.6px;\n  text-align: left;\n  margin-top: 20px;\n}\n",
+                    "styleUrl": "./dashboard.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"container d-flex flex-column\">\n  <app-header></app-header>\n  <app-card\n    class=\"app-card card--next-appointment\"\n    cardPictureSrc=\"assets/image 8.svg\"\n    name = 'Dr. Imran Syahir'\n    speciality = 'General Doctor'\n    upRightCardIcon=\"chevron-right\"\n    leftCardIconName=\"calendar-days\"\n    leftCardIconLabel=\"Sunday, 12 June\"\n    rightCardIconName=\"clock-4\"\n    rightCardIconLabel=\"11:00 - 12:00 AM\"\n  ></app-card>\n  <div class=\"d-flex justify-content-center\">\n    <mat-form-field class=\"w-100 search-input\">\n      <mat-label>Search doctor or health issue</mat-label>\n      <mat-icon matPrefix>search</mat-icon>\n      <input matInput placeholder=\"Digite sua pesquisa\" />\n    </mat-form-field>\n  </div>\n  <app-fab-card [fabCardItems]=\"fabCardItems\" iconSize=\"30\"></app-fab-card>\n  <h3>Closest Available Time</h3>\n  <app-card\n    class=\"app-card card--next-available-spot\"\n    cardPictureSrc=\"assets/image 9.svg\"\n    name = 'Dr. Joseph Brostito'\n    speciality = 'Dental Specialist'\n    upRightCardIcon=\"map-pin\"\n    upRightCardLabel=\"1.2 KM\"\n    leftCardIconName=\"star\"\n    leftCardIconLabel=\"4,8 (120 Reviews)\"\n    rightCardIconName=\"clock-4\"\n    rightCardIconLabel=\"Open at 17.00\"\n  ></app-card>\n  <app-footer [menuItems]=\"footerMenuItems\" [activeItem]=\"activeItem\"></app-footer>\n</div>\n"
+        },
+        {
+            "name": "FabCardComponent",
+            "id": "component-FabCardComponent-1cd2edf83f08d6071fe1ca17782ca867ff445c7b42efe18a4a055faf54ae255718f0449955642f8946da9749906d1126b40171cfca2b9380ae9fdae2674b8ef0",
+            "file": "src/app/shared/components/fab-card/fab-card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-fab-card",
+            "styleUrls": [
+                "./fab-card.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./fab-card.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "fabCardItems",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "literal type[]",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-fab-card',\n  templateUrl: './fab-card.component.html',\n  styleUrls: ['./fab-card.component.scss']\n})\nexport class FabCardComponent {\n  @Input() fabCardItems: { name: string; label: string; }[] = [];\n  @Input() size: string;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".icon {\n  color: #4894FE;\n  background-color: #FAFAFA;\n  padding: 15px;\n}\n\nlabel {\n  font-family: \"Poppins\";\n  font-size: 15px;\n  font-weight: 400;\n  line-height: 22.5px;\n  text-align: left;\n  text-underline-position: from-font;\n  text-decoration-skip-ink: none;\n  color: #8696BB;\n}\n",
+                    "styleUrl": "./fab-card.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"d-flex justify-content-around\">\n  <div\n    class=\"d-flex flex-column align-items-center gap-2\"\n    *ngFor=\"let fabCardItem of fabCardItems\"\n  >\n    <div class=\"icon rounded-circle\">\n      <app-icon [name]=\"fabCardItem.name\" [size]=\"size\"></app-icon>\n    </div>\n    <span class=\"label\">{{ fabCardItem.label }}</span>\n  </div>\n</div>\n"
+        },
+        {
+            "name": "FooterComponent",
+            "id": "component-FooterComponent-4ef173c9445e4cf432c431e77dfa875901aada706cf73fb3d9ccd11ec08c525c289c4ae32ec6435fb574c9858300760add71dd2db29adc2ed82c83f84da6d5b9",
+            "file": "src/app/shared/components/footer/footer.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-footer",
+            "styleUrls": [
+                "./footer.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./footer.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "activeItem",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "menuItems",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "literal type[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "setActive",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, } from '@angular/core';\n\n@Component({\n  selector: 'app-footer',\n  templateUrl: './footer.component.html',\n  styleUrls: ['./footer.component.scss']\n})\nexport class FooterComponent {\n  @Input() menuItems: { name: string; icon: string; label: string; link: string }[] = [];\n  @Input() activeItem: string;\n\n  setActive(item: string) {\n    this.activeItem = item;\n  }\n}\n\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".footer-menu {\n  display: flex;\n  justify-content: space-around; // Mantém os ícones distribuídos igualmente\n  background: #ffffff;\n  padding: 12px 0;\n  position: fixed;\n  bottom: 0;\n  width: 100%;\n  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);\n\n  a {\n    text-decoration: none;\n    color: #888;\n    font-size: 24px;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    padding: 10px;\n    transition: color 0.3s ease-in-out;\n\n    .label {\n      position: absolute;\n      font-size: 14px;\n      font-weight: 700;\n      opacity: 0;\n      transform: scale(0);\n      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;\n    }\n\n    &.active {\n      padding: 12px;\n      border-radius: 12px;\n      background: rgba(99, 180, 255, 0.1);\n      color: #63B4FF;\n\n      .label {\n        position: inherit;\n        opacity: 1;\n        transform: translate(0px);\n        margin-left: 5px;\n      }\n    }\n  }\n}\n",
+                    "styleUrl": "./footer.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"d-flex justify-content-center\">\n  <nav class=\"footer-menu\" role=\"navigation\">\n    <a\n      *ngFor=\"let item of menuItems\"\n      [class.active]=\"activeItem === item.name\"\n      (click)=\"setActive(item.name)\"\n      >\n      <app-icon [name]=\"item.icon\" size=\"24\"></app-icon>\n      <span class=\"label\">{{ item.label }}</span>\n    </a>\n  </nav>\n</div>\n"
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-48b9abe37706bc42f20cfa97ed9f943678344ea7d254c0c82183c657750c2191b43486fe730c778627b2ea6aa0e2f33a7abcf3ce08b68ad18b062ad99ea97acb",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>  <div class=\"storybook-header\">\n    <div>\n      <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n            fill=\"#FFF\"\n          />\n          <path\n            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n            fill=\"#555AB9\"\n          />\n          <path d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\" fill=\"#91BAF8\" />\n        </g>\n      </svg>\n      <h1>Acme</h1>\n    </div>\n    <div>\n      <div *ngIf=\"user\">\n        <span class=\"welcome\">\n          Welcome, <b>{{ user.name }}</b\n          >!\n        </span>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n      </div>\n      <div *ngIf=\"!user\">\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          class=\"margin-left\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          [primary]=\"true\"\n          class=\"margin-left\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </div>\n</header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 66,
+                    "type": "User | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 75,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 69,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 72,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { ButtonComponent } from './button.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-header',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  template: `<header>\n  <div class=\"storybook-header\">\n    <div>\n      <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n            fill=\"#FFF\"\n          />\n          <path\n            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n            fill=\"#555AB9\"\n          />\n          <path d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\" fill=\"#91BAF8\" />\n        </g>\n      </svg>\n      <h1>Acme</h1>\n    </div>\n    <div>\n      <div *ngIf=\"user\">\n        <span class=\"welcome\">\n          Welcome, <b>{{ user.name }}</b\n          >!\n        </span>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n      </div>\n      <div *ngIf=\"!user\">\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          class=\"margin-left\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          [primary]=\"true\"\n          class=\"margin-left\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </div>\n</header>`,\n  styleUrls: ['./header.css'],\n})\nexport class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  display: inline-block;\n  vertical-align: top;\n  margin: 6px 0 6px 10px;\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  margin-right: 10px;\n  color: #333;\n  font-size: 14px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-a861bd3a9922565f137408b6d2ceba31a87683589d568e34460a8731ef7d2b703aaae0d1ff620c90bc52b0827551402fcbde85aab477c3db62aaa3d805b92150-1",
+            "file": "src/app/shared/components/header/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-header",
+            "styleUrls": [
+                "./header.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./header.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent {\n  @Input() label= ''\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".header {\n  height: auto;\n  align-content: center;\n}\n",
+                    "styleUrl": "./header.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "HeaderComponent-1",
+            "templateData": "<div class=\"header\">\n <app-label text=\"Hello,\" name=\"Igor\"></app-label>\n</div>\n"
+        },
+        {
+            "name": "IconComponent",
+            "id": "component-IconComponent-2d7306ccd8e7b76d2dd482a9a89d824bf7757b81099fe19034797f70916b0e57a78a0255f84ba95e0a8b770d2694e592ec20c6862984132ab9f149b7f595331e",
+            "file": "src/app/shared/components/icon/icon.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-icon",
+            "styleUrls": [
+                "./icon.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./icon.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-icon',\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.scss']\n})\nexport class IconComponent {\n  @Input() name: string;\n  @Input() size: string;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./icon.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<lucide-icon [name]=\"name\" [size]=\"size\"></lucide-icon>\n"
+        },
+        {
+            "name": "InputComponent",
+            "id": "component-InputComponent-ae40ca89eb3bb25135e1c38810798af7ec914aed3e09a893bdb6b6d76bb7645f418bc45822bc4c0d62fbe599f23623f8b3331e030a6bd5de5bca9301d83804e3",
+            "file": "src/app/shared/components/input/input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-input",
+            "styleUrls": [
+                "./input.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./input.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "control",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "form",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "FormGroup",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormGroup } from '@angular/forms';\n\n@Component({\n  selector: 'app-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent {\n  @Input() label: string;\n  @Input() placeholder: string;\n  @Input() type: string;\n  @Input() form: FormGroup;\n  @Input() control: string;\n\n  constructor() {}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "input {\n  height: 25px;\n  width: 100%;\n}\n\nlabel {\n  padding-right: 5px;\n}\n",
+                    "styleUrl": "./input.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 14
+            },
+            "extends": [],
+            "templateData": "<div [formGroup]=\"form\">\n  <label>{{ label }}</label>\n  <input [formControlName]=\"control\" [placeholder]=\"placeholder\" [type]=\"type\" />\n</div>\n"
+        },
+        {
+            "name": "LabelComponent",
+            "id": "component-LabelComponent-dcc821c9397c21f960030bc705c0a49b2be6050863510ab6815a0c585e44fa4c8496aef1c6a031cb40343b54f3c0c692cba3f74d1bdc60eb1988a4ab07b9029d",
+            "file": "src/app/shared/components/label/label.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-label",
+            "styleUrls": [
+                "./label.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./label.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-label',\n  templateUrl: './label.component.html',\n  styleUrls: ['./label.component.scss']\n})\n\nexport class LabelComponent {\n  @Input() text:string;\n  @Input() name:string;\n  constructor() {}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\n.container {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n}\n\nlabel {\n  font-family: 'Poppins';\n  font-size: 22px;\n  font-weight: 400;\n  line-height: 19.2px;\n  color: #8696BB;\n\n}\n\nh1 {\n  font-family: 'Poppins';\n  font-size: 26px;\n  font-weight: bold;\n  line-height: 22px;\n  color: #0D1B34;\n}\n",
+                    "styleUrl": "./label.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 11
+            },
+            "extends": [],
+            "templateData": "<div class=\"container\">\n  <div class=\"d-flex flex-column gap-2\">\n    <label>{{ text }}</label>\n    <h1>{{ name }}</h1>\n  </div>\n  <div>\n    <img src=\"assets/Frame.svg\">\n  </div>\n</div>\n\n"
+        },
+        {
+            "name": "LoginComponent",
+            "id": "component-LoginComponent-1c3e39a6824455c0601e5ddf3c8f4c2fb7620cfef73b48772d2e5f651562599acbcd00e225ac993d48cc2dbf47d4aaf67f8d0db82ddc3b193ecb91196320494b",
+            "file": "src/app/pages/login/login.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-login",
+            "styleUrls": [
+                "./login.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./login.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "loginData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "loginDataInterface",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "loginForm",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "erase",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "login",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { AuthService } from 'src/app/services/auth.service';\n\ninterface loginDataInterface {\n  username: string;\n  password: string;\n}\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss'],\n})\nexport class LoginComponent {\n  loginForm: FormGroup;\n  loginData: loginDataInterface;\n\n  constructor(\n    private fb: FormBuilder,\n    private authService: AuthService,\n    private router: Router\n  ) {\n    this.loginForm = this.fb.group({\n      user: ['', [Validators.required, Validators.minLength(3)]],\n      password: ['', [Validators.required]],\n    });\n\n  }\n\n  login() {\n    if (this.loginForm.invalid) {\n      this.loginForm.markAllAsTouched();\n      return;\n    }\n\n    const { user, password } = this.loginForm.value;\n\n    if (this.authService.validateCredentials(user, password)) {\n      this.router.navigate(['/admin-center']); // Navigate to the admin-center page\n    } else {\n      alert('Username or Password is incorrect!');\n    }\n  }\n\n  erase() {\n    this.loginForm.reset();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".container {\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  width: 100vw;\n  margin: auto;\n  justify-content: center;\n  align-items: center;\n  border: 3px solid red;\n}\n\n.content {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  box-shadow: inset;\n  border: solid 3px blue;\n  border-radius: 25px;\n  padding: 40px;\n  box-shadow: 5px 4px 4px grey;\n  gap: 15px;\n}\n\nform {\n display: flex;\n flex-direction: column;\n justify-content: center;\n}\n\n.button-div {\n  display: flex;\n  gap: 8px;\n}\n\nsmall {\n  color: red\n}\n\napp-button {\n  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;\n  transition: all300ms ease;\n  border-radius: 20px;\n}\n\napp-button:hover {\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,\n  rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;\n}\n\n.logoForm {\n  width: 70px;\n  height: 70px;\n}\n",
+                    "styleUrl": "./login.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "authService",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 18,
+                "jsdoctags": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "authService",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "templateData": "<div class=\"container\">\n  <div class=\"content\">\n    <div>\n      <img class=\"logoForm\" src=\"assets/pngwing.com.png\">\n    </div>\n    <form [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\n      <app-input\n        [form]=\"loginForm\"\n        control=\"user\"\n        label=\"Username: \"\n        placeholder=\"Digite o username\"\n        type=\"text\"\n      ></app-input>\n      <div *ngIf=\"loginForm.get('user')?.touched && loginForm.get('user')?.invalid && loginForm.get('user')?.dirty\">\n        <small *ngIf=\"loginForm.get('user')?.errors?.['required']\">O username é obrigatório.</small>\n        <small *ngIf=\"loginForm.get('user')?.errors?.['minlength']\">O username deve ter pelo menos 3 characters.</small>\n      </div>\n      <app-input\n        [form]=\"loginForm\"\n        control=\"password\"\n        label=\"Password: \"\n        placeholder=\"Digite a senha\"\n        type=\"password\"\n      ></app-input>\n      <div *ngIf=\"loginForm.get('password')?.touched && loginForm.get('password')?.invalid && loginForm.get('password')?.dirty\">\n        <small *ngIf=\"loginForm.get('password')?.errors?.['required']\">A senha é obrigatória.</small>\n      </div>\n    </form>\n    <div class=\"button-div\">\n      <app-button [label]=\"'Entrar'\" [disabled]=\"loginForm.invalid\" type=\"submit\" (click)=\"login()\"></app-button>\n      <app-button [label]=\"'Limpar'\" class=\"secondary\" type=\"button\" (click)=\"erase()\"></app-button>\n    </div>\n  </div>\n</div>\n"
+        },
+        {
+            "name": "ModalComponent",
+            "id": "component-ModalComponent-e8cf76329063b1cdadb326858259799bf31fa99b42488ca510a29b4d1839bd335d5be85daa1e99df088fe1da4b446bec97492de6c5109a97807fac5e894f367d",
+            "file": "src/app/shared/components/modal/modal.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-modal",
+            "styleUrls": [
+                "./modal.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./modal.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-modal',\n  templateUrl: './modal.component.html',\n  styleUrls: ['./modal.component.scss']\n})\nexport class ModalComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./modal.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>modal works!</p>\n"
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-21dd6eb370b4983b5c21c84d40e6f54d266a9d9af9889e6e76b35c43058bd53b3e451bad089d5adf4bea46647ba10265a2fa8cb15630398e75636307d4817fc6",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>  <storybook-header\n    [user]=\"user\"\n    (onLogout)=\"doLogout()\"\n    (onLogin)=\"doLogin()\"\n    (onCreateAccount)=\"doCreateAccount()\"\n  ></storybook-header>\n  <section class=\"storybook-page\">\n    <h2>Pages in Storybook</h2>\n    <p>\n      We recommend building UIs with a\n      <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n        <strong>component-driven</strong>\n      </a>\n      process starting with atomic components and ending with pages.\n    </p>\n    <p>\n      Render pages with mock data. This makes it easy to build and review page states without\n      needing to navigate to them in your app. Here are some handy patterns for managing page data\n      in Storybook:\n    </p>\n    <ul>\n      <li>\n        Use a higher-level connected component. Storybook helps you compose such data from the\n        \"args\" of child component stories\n      </li>\n      <li>\n        Assemble data in the page component from your services. You can mock these services out\n        using Storybook.\n      </li>\n    </ul>\n    <p>\n      Get a guided tutorial on component-driven development at\n      <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n        Storybook tutorials\n      </a>\n      . Read more in the\n      <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n      .\n    </p>\n    <div class=\"tip-wrapper\">\n      <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n      <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n            id=\"a\"\n            fill=\"#999\"\n          />\n        </g>\n      </svg>\n      Viewports addon in the toolbar\n    </div>\n  </section>\n</article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "User | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 69
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "doCreateAccount",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "HeaderComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { HeaderComponent } from './header.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-page',\n  standalone: true,\n  imports: [CommonModule, HeaderComponent],\n  template: `<article>\n  <storybook-header\n    [user]=\"user\"\n    (onLogout)=\"doLogout()\"\n    (onLogin)=\"doLogin()\"\n    (onCreateAccount)=\"doCreateAccount()\"\n  ></storybook-header>\n  <section class=\"storybook-page\">\n    <h2>Pages in Storybook</h2>\n    <p>\n      We recommend building UIs with a\n      <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n        <strong>component-driven</strong>\n      </a>\n      process starting with atomic components and ending with pages.\n    </p>\n    <p>\n      Render pages with mock data. This makes it easy to build and review page states without\n      needing to navigate to them in your app. Here are some handy patterns for managing page data\n      in Storybook:\n    </p>\n    <ul>\n      <li>\n        Use a higher-level connected component. Storybook helps you compose such data from the\n        \"args\" of child component stories\n      </li>\n      <li>\n        Assemble data in the page component from your services. You can mock these services out\n        using Storybook.\n      </li>\n    </ul>\n    <p>\n      Get a guided tutorial on component-driven development at\n      <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n        Storybook tutorials\n      </a>\n      . Read more in the\n      <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n      .\n    </p>\n    <div class=\"tip-wrapper\">\n      <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n      <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n            id=\"a\"\n            fill=\"#999\"\n          />\n        </g>\n      </svg>\n      Viewports addon in the toolbar\n    </div>\n  </section>\n</article>`,\n  styleUrls: ['./page.css'],\n})\nexport class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-page {\n  margin: 0 auto;\n  padding: 48px 20px;\n  max-width: 600px;\n  color: #333;\n  font-size: 14px;\n  line-height: 24px;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\n.storybook-page h2 {\n  display: inline-block;\n  vertical-align: top;\n  margin: 0 0 4px;\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  color: inherit;\n}\n\n.storybook-page ul {\n  margin: 1em 0;\n  padding-left: 30px;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  vertical-align: top;\n  margin-right: 10px;\n  border-radius: 1em;\n  background: #e7fdd8;\n  padding: 4px 12px;\n  color: #357a14;\n  font-weight: 700;\n  font-size: 11px;\n  line-height: 12px;\n}\n\n.storybook-page .tip-wrapper {\n  margin-top: 40px;\n  margin-bottom: 40px;\n  font-size: 13px;\n  line-height: 20px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  vertical-align: top;\n  margin-top: 3px;\n  margin-right: 4px;\n  width: 12px;\n  height: 12px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "SchedulePageComponent",
+            "id": "component-SchedulePageComponent-66296f650ed4ee8e704310f6c7c386f1188a6e29ca1eae5f58dc8101d295bc64adbbc4ebce63faa07a98d013661ac702a26c4eaff8fd9b123bda6ef07e8885b8",
+            "file": "src/app/pages/schedule-page/schedule-page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-schedule-page",
+            "styleUrls": [
+                "./schedule-page.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./schedule-page.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-schedule-page',\n  templateUrl: './schedule-page.component.html',\n  styleUrls: ['./schedule-page.component.scss']\n})\nexport class SchedulePageComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./schedule-page.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>schedule-page works!</p>\n"
+        },
+        {
+            "name": "SelectComponent",
+            "id": "component-SelectComponent-4342f77ba8894f466f5937f9cfdd19f2ebdbccea6d2336656872ba4eeafdfe2cbc9623d00e524d779993fc7144d2a6db10acaede84985462f57077d568fd800c",
+            "file": "src/app/shared/components/select/select.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-select",
+            "styleUrls": [
+                "./select.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./select.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-select',\n  templateUrl: './select.component.html',\n  styleUrls: ['./select.component.scss']\n})\nexport class SelectComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./select.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>select works!</p>\n"
+        },
+        {
+            "name": "SideMenuComponent",
+            "id": "component-SideMenuComponent-265da087f9438e03690121f1add4a4ff1692ff00b049eef8a3d8aa86ea13c361362e27dc6ad8f52e47dbfae60919f39c18fbcf997ccbf22466709f435591ca86",
+            "file": "src/app/shared/components/side-menu/side-menu.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-side-menu",
+            "styleUrls": [
+                "./side-menu.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./side-menu.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "menuItems",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "menuItemInterface[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Router } from '@angular/router';\n\ninterface menuItemInterface {\n  label: string;\n  routerLink: string;\n  routerLinkActive: string,\n  ariaCurrentWhenActive: string\n}\n\n@Component({\n  selector: 'app-side-menu',\n  templateUrl: './side-menu.component.html',\n  styleUrls: ['./side-menu.component.scss']\n})\nexport class SideMenuComponent {\n\n  @Input() menuItems: menuItemInterface[] = []\n\n  constructor() {}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "nav ul {\n  list-style: none;\n  padding: 0;\n}\n\nnav li {\n  cursor: pointer;\n  padding: 5px;\n  border: 1px solid rgb(25, 47, 115);\n  margin: 2px 0;\n  transition: background-color 0.3s;\n  background-color: rgb(25, 47, 115);\n  color: #f0f0f0;\n\n  &:hover, :selection {\n    background-color: #f0f0f0;\n    color: rgb(25, 47, 115);\n  }\n\n}\n",
+                    "styleUrl": "./side-menu.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 18
+            },
+            "extends": [],
+            "templateData": "<nav>\n  <ul>\n    <li\n      *ngFor=\"let item of menuItems\"\n      [routerLink]=\"item.routerLink\"\n      routerLinkActive=\"{{ item.routerLinkActive }}\"\n      [attr.aria-current]=\"item.ariaCurrentWhenActive\"\n    >\n      <a>{{ item.label }}</a>\n    </li>\n  </ul>\n</nav>\n"
+        },
+        {
+            "name": "TextareaComponent",
+            "id": "component-TextareaComponent-8ebb855b6fd4543a8409268678d9d29abf8c124e6663613b750e4248efdcecc0f8fab0e9febdd58f8bf5ecb4c3baa6bdad5151403f678f28da1c449ea35f1d17",
+            "file": "src/app/shared/components/textarea/textarea.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-textarea",
+            "styleUrls": [
+                "./textarea.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./textarea.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-textarea',\n  templateUrl: './textarea.component.html',\n  styleUrls: ['./textarea.component.scss']\n})\nexport class TextareaComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./textarea.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>textarea works!</p>\n"
+        }
+    ],
+    "modules": [
+        {
+            "name": "AlertModule",
+            "id": "module-AlertModule-631770cb7ec6ab447cc9fe649da6727d2e304fd3a46d9ef6b738b82c87a1ee7a1c5d9741b2a05053fed619d59f62d80faa8e369c388525356a616b88d0482e69",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/alert/alert.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AlertComponent } from './alert.component';\n\n\n\n@NgModule({\n  declarations: [\n    AlertComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    AlertComponent\n  ]\n})\nexport class AlertModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AlertComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "AlertComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-eb9449100166c192b110b0b776c0b603e396cb82b01c225128fe2729d432b84d35aa7b8ad822e8ed3b8971e77fa33665d33c52d499975fb6a3efb10a078e89cf",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { CommonModule } from '@angular/common';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\n\n\n\n\n\n\n@NgModule({\n  declarations: [\n    AppComponent,\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    ReactiveFormsModule,\n    CommonModule,\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppRoutingModule",
+            "id": "module-AppRoutingModule-5177c9bcbee0f93a49a5c459f0a1bc076dbc1824145e0cd6b0777691f4f0809f8a9d5da36b559572d1e03232a047c5b8118b9c79bf810e42328a79119e7d851b",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';\nimport { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\n\nconst routes: Routes = [\n  {\n    path: 'login',\n    loadChildren: () =>\n      \"import('./pages/login/login.module').then((m) => m.LoginModule)\",\n  },\n  {\n    path: 'customers',\n    loadChildren: () =>\n      \"import('./customers/customers.module').then((m) => m.CustomersModule)\",\n  },\n  {\n    path: 'dashboard',\n    loadChildren: () =>\n      \"import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule)\",\n  },\n  {\n    path: 'schedule-page',\n    loadChildren: () =>\n      \"import('./pages/schedule-page/schedule-page.module').then((m) => m.SchedulePageModule)\",\n  },\n  { path: '', redirectTo: 'login', pathMatch: 'full' },\n  { path: '**', redirectTo: 'login' },\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule],\n})\nexport class AppRoutingModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "ButtonModule",
+            "id": "module-ButtonModule-3e6ac8165fdf51b260ea3f3074290b4e5fc421bc55011aae2bf24940937c8ee931ffe74f52ec010a644e9e0a37b84a63e77704145aad0d736bab9202517830ec",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/button/button.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ButtonComponent } from './button.component';\n\n\n\n@NgModule({\n  declarations: [\n    ButtonComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    ButtonComponent\n  ]\n})\nexport class ButtonModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ButtonComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "CardModule",
+            "id": "module-CardModule-69fc4adacf921b2232a700ee35ebc8c305459e44e4580b83e2246a9d6a6e730d2a38fdb031155aa634e0d6f41e63f4ca5e7499f6de666b7648a91e4b23cf6fb5",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/card/card.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { CardComponent } from './card.component';\nimport { LucideAngularModule, icons  } from 'lucide-angular';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatIconModule } from '@angular/material/icon';\nimport { IconModule } from \"../icon/icon.module\";\n\n@NgModule({\n  declarations: [\n    CardComponent\n  ],\n  imports: [\n    CommonModule,\n    LucideAngularModule.pick(icons),\n    MatInputModule,\n    MatIconModule,\n    IconModule\n],\n  exports: [\n    CardComponent\n  ]\n})\nexport class CardModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "CardComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "IconModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "CardComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "CustomersFormModule",
+            "id": "module-CustomersFormModule-e535e964692c4c0c9192d6022b96797bf3c1223ee2356ca145880e2e4da666860da727a60da836c0b5bdf4322f576cc6680e3861033f0cfb3b405f25a2fad123",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/customers/customers-form/customers-form.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatCardModule } from '@angular/material/card';\nimport { MatNativeDateModule } from '@angular/material/core';\nimport { MatDatepickerModule } from '@angular/material/datepicker';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatSelectModule } from '@angular/material/select';\n\nimport { CustomersFormComponent } from './customers-form.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { CpfMaskDirective } from 'src/app/shared/directives/cpf-mask.directive';\n\n\n\n@NgModule({\n  declarations: [\n      CustomersFormComponent,\n      CpfMaskDirective,\n    ],\n    imports: [\n      CommonModule,\n      MatInputModule,\n      MatButtonModule,\n      MatSelectModule,\n      MatDatepickerModule,\n      MatNativeDateModule,\n      MatCardModule,\n      MatFormFieldModule,\n      ReactiveFormsModule\n    ],\n    exports: [\n      CustomersFormComponent\n    ]\n})\nexport class CustomersFormModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "CpfMaskDirective"
+                        },
+                        {
+                            "name": "CustomersFormComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "CustomersFormComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "CustomersModule",
+            "id": "module-CustomersModule-6035560d03971f32505d503ea1662665628cf1536955fb7d9c1496787414ba916bd33dd51b715b36bf121bdffb66fcc63ed1740290c94440568029137d26970d",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/customers/customers.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { CustomersRoutingModule } from './customers-routing.module';\nimport { CustomersComponent } from './customers.component';\nimport { CustomersFormModule } from './customers-form/customers-form.module';\n\n\n\n@NgModule({\n  declarations: [\n    CustomersComponent\n  ],\n  imports: [\n    CommonModule,\n    CustomersRoutingModule,\n    CustomersFormModule\n  ]\n})\nexport class CustomersModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "CustomersComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "CustomersFormModule"
+                        },
+                        {
+                            "name": "CustomersRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "CustomersRoutingModule",
+            "id": "module-CustomersRoutingModule-de6ac255e58998615c75d82f4e9df602aaa1fbf4150c7d09e176d4ff57e9deffaa9b4e155fa2c3cd52e126ca689c9bae3f5e36d48d5612db12796200982480b8",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/customers/customers-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { CustomersComponent } from './customers.component';\nimport { CustomersFormComponent } from './customers-form/customers-form.component';\n\nconst routes: Routes = [\n  { path: '', component: CustomersComponent },\n  { path: 'new', component: CustomersFormComponent },\n  { path: 'edit/:id', component: CustomersFormComponent }\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class CustomersRoutingModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "DashboardModule",
+            "id": "module-DashboardModule-460452488bb17246afe07c400850e1438c5136b68f6563c8b497a19c6119915179ec0863b4ca0332cc397f3f1b40ab16a5c3036ee89841268b8c0277b6c521a0",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/pages/dashboard/dashboard.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { DashboardRoutingModule } from './dashboard-routing.module';\nimport { DashboardComponent } from './dashboard.component';\nimport { HeaderModule } from 'src/app/shared/components/header/header.module';\nimport { CardModule } from 'src/app/shared/components/card/card.module';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatIconModule } from '@angular/material/icon';\nimport { FabCardModule } from 'src/app/shared/components/fab-card/fab-card.module';\nimport { IconModule } from 'src/app/shared/components/icon/icon.module';\nimport { FooterModule } from 'src/app/shared/components/footer/footer.module';\n\n\n@NgModule({\n  declarations: [\n    DashboardComponent\n  ],\n  imports: [\n    CommonModule,\n    DashboardRoutingModule,\n    HeaderModule,\n    CardModule,\n    MatInputModule,\n    MatIconModule,\n    FabCardModule,\n    IconModule,\n    FooterModule\n  ]\n})\nexport class DashboardModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "DashboardComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "CardModule"
+                        },
+                        {
+                            "name": "DashboardRoutingModule"
+                        },
+                        {
+                            "name": "FabCardModule"
+                        },
+                        {
+                            "name": "FooterModule"
+                        },
+                        {
+                            "name": "HeaderModule"
+                        },
+                        {
+                            "name": "IconModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "DashboardRoutingModule",
+            "id": "module-DashboardRoutingModule-e5ad8df84626750ec4e950fc857a98f7b3a40f190d9bf571766ff7bc35ddeccc0a780934a4e611c5b8c8c4aebe5e96880d491a4102f59451a28cf20b470bf41f",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/pages/dashboard/dashboard-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { DashboardComponent } from './dashboard.component';\n\nconst routes: Routes = [\n  {path: '', component: DashboardComponent}\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class DashboardRoutingModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "FabCardModule",
+            "id": "module-FabCardModule-3a35df8fb6bb4a3c8abd718dfe714eb6161c5db57edb420d62fe0007e6ec4f1052b8911207091619d0e5b02bc1a294218d4f238dd9a9dd6d26d29dfef99a183e",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/fab-card/fab-card.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FabCardComponent } from './fab-card.component';\nimport { IconModule } from \"../icon/icon.module\";\n\n\n\n@NgModule({\n  declarations: [\n    FabCardComponent\n  ],\n  imports: [\n    CommonModule,\n    IconModule\n],\n  exports: [\n    FabCardComponent\n  ]\n})\nexport class FabCardModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "FabCardComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "IconModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "FabCardComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "FooterModule",
+            "id": "module-FooterModule-3040481534851bf42ba4fed2f2eb518c59df3f162ac276570a3fa415f9462cdd8c2c78437249f4961d7929d01b8972dd136bf0385f485226ea1482fe0dada77a",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/footer/footer.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FooterComponent } from './footer.component';\nimport { IconModule } from '../icon/icon.module';\nimport { RouterLink } from '@angular/router';\n\n\n\n@NgModule({\n  declarations: [\n    FooterComponent\n  ],\n  imports: [\n    CommonModule,\n    IconModule,\n    RouterLink\n  ],\n  exports: [\n    FooterComponent\n  ]\n})\nexport class FooterModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "FooterComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "IconModule"
+                        },
+                        {
+                            "name": "RouterLink"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "FooterComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "HeaderModule",
+            "id": "module-HeaderModule-15682f79d584d04a752af1ff67ff5c06db81ac856dd0d07d7961bc5f98b34a0521f0fb58e84a3b062080c171ecd76b1341ee4868a37b059a945c471b013d1512",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/header/header.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { HeaderComponent } from './header.component';\nimport { LabelModule } from '../label/label.module';\n\n\n\n\n@NgModule({\n  declarations: [\n    HeaderComponent\n  ],\n  imports: [\n    CommonModule,\n    LabelModule,\n  ],\n  exports: [\n    HeaderComponent\n  ]\n})\nexport class HeaderModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "HeaderComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "LabelModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "IconModule",
+            "id": "module-IconModule-2f27b0913af77a4d0057d2e8e5676197730a31802e7734699fb6d63992f5229066c539e415c4c3bf3a6ea31e195affd874a36142fac6399d6acdd1ba9dc848af",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/icon/icon.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { IconComponent } from './icon.component';\nimport { LucideAngularModule } from 'lucide-angular';\n\n\n\n@NgModule({\n  declarations: [\n    IconComponent\n  ],\n  imports: [\n    CommonModule,\n    LucideAngularModule\n  ],\n  exports: [\n    IconComponent\n  ]\n})\nexport class IconModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "IconComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "IconComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "InputModule",
+            "id": "module-InputModule-b7eaee358eb46033511272d2dd5143071a63c0cc05f4b5e9243b39912b6e8e532214f1d47ce4206855cd925448136bef44661ee1d23d1c0e29225b20a022106a",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/input/input.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputComponent } from './input.component';\nimport { ReactiveFormsModule } from '@angular/forms';\n\n\n\n@NgModule({\n  declarations: [\n    InputComponent\n  ],\n  imports: [\n    CommonModule,\n    ReactiveFormsModule\n  ],\n  exports: [\n    InputComponent\n  ]\n})\nexport class InputModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "InputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "InputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "LabelModule",
+            "id": "module-LabelModule-eb2faa8ca7cd9157f5a9f6e90c139fde59482a395e9e4b4afc2c86afc77b5281b7abd02285db0c688ac68baffcf962fad54cd4d42a359b9ab410dbe8cfb004ea",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/label/label.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LabelComponent } from './label.component';\n\n\n\n@NgModule({\n  declarations: [\n    LabelComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    LabelComponent\n  ]\n})\nexport class LabelModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "LabelComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "LabelComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "LoginModule",
+            "id": "module-LoginModule-45fea8c0f071f09e591a405f1b3c6b34d20dba27c6df877123ea79565348295b0f05eaaa8f66c75c12a9c65df365f091c793a63ab2e0d3219fcd12fd3467f68e",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/pages/login/login.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { LoginComponent } from './login.component';\nimport { ButtonModule } from 'src/app/shared/components/button/button.module';\nimport { LoginRoutingModule } from './login-routing.module';\nimport { InputModule } from 'src/app/shared/components/input/input.module';\nimport { ReactiveFormsModule } from '@angular/forms';\n\n\n\n\n@NgModule({\n  declarations: [\n    LoginComponent\n  ],\n  imports: [\n    CommonModule,\n    ReactiveFormsModule,\n    ButtonModule,\n    InputModule,\n    LoginRoutingModule,\n  ],\n  exports: [\n    LoginComponent,\n    ReactiveFormsModule\n  ]\n})\nexport class LoginModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "LoginComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "ButtonModule"
+                        },
+                        {
+                            "name": "InputModule"
+                        },
+                        {
+                            "name": "LoginRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "LoginComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "LoginRoutingModule",
+            "id": "module-LoginRoutingModule-5660248f6b6ef2b2a1e5937288a0f07279fca73d375d953cc6e7d417a2637f58d315793c3f1b8c76fd059dce14360f3d1fcc385d1b494e07b7fbe434cb09f31d",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/pages/login/login-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { LoginComponent } from './login.component';\n\nconst routes: Routes = [\n  { path: '', component: LoginComponent },\n  ];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class LoginRoutingModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "ModalModule",
+            "id": "module-ModalModule-5548afeb0eb652bd191f67ad937955a8a4ba48eba6c38938003c6a1b15e8333992a75b935ebd07c135317c78418303dcc7715ae78bc4aa0f22a583b3b311e413",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/modal/modal.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ModalComponent } from './modal.component';\n\n\n\n@NgModule({\n  declarations: [\n    ModalComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    ModalComponent\n  ]\n})\nexport class ModalModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ModalComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "ModalComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SchedulePageModule",
+            "id": "module-SchedulePageModule-366a1e05710e479cdebad1a94aa7905d490575d7c16f72071d8bf3273e08c07371b0524c52ff1b49dc0f47c3decd65b84537bfa328edc35c8fe824e013b53be4",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/pages/schedule-page/schedule-page.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { SchedulePageRoutingModule } from './schedule-page-routing.module';\nimport { SchedulePageComponent } from './schedule-page.component';\n\n\n@NgModule({\n  declarations: [\n    SchedulePageComponent\n  ],\n  imports: [\n    CommonModule,\n    SchedulePageRoutingModule\n  ],\n  exṕorts: [\n    SchedulePageComponent\n  ]\n})\nexport class SchedulePageModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SchedulePageComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "SchedulePageRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SchedulePageRoutingModule",
+            "id": "module-SchedulePageRoutingModule-048de79ee7d9119f44116f37cb4a85f5640f82c6a93b165001998b506bbb4755cc3dcde3db5602ee4d8b38976db7677baacebe3546311c6f02c241a600d091c8",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/pages/schedule-page/schedule-page-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nconst routes: Routes = [];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class SchedulePageRoutingModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SelectModule",
+            "id": "module-SelectModule-44d1d0c7ed59fb7b870f265f924cb8e52f164ac03e9e71949898bd9b744017660b9841be6a4ecb24fe41ac96a526ffae698bb639add231d9ac184a3fb82a9f39",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/select/select.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { SelectComponent } from './select.component';\n\n\n\n@NgModule({\n  declarations: [\n    SelectComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    SelectComponent\n  ]\n})\nexport class SelectModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SelectComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "SelectComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SideMenuModule",
+            "id": "module-SideMenuModule-a8ec0d4e0e42b780feb2e6cb7d2e1faa1120542128d63c1c7576421e5ca81f292c271c0b62942f17c7ff83e8f3ad2c5d6169f6a25154e14b2502739495d16821",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/side-menu/side-menu.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { SideMenuComponent } from './side-menu.component';\nimport { RouterModule } from '@angular/router';\n\n\n\n@NgModule({\n  declarations: [\n    SideMenuComponent\n  ],\n  imports: [\n    CommonModule,\n    RouterModule\n  ],\n  exports: [\n    SideMenuComponent\n  ]\n})\nexport class SideMenuModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SideMenuComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "SideMenuComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TextareaModule",
+            "id": "module-TextareaModule-9252d84b30936e7540cdec6ca3fbdc456cc028f177de53a6e6f46517b71bd81ff56406d8d65ac17d00c1cf07aede9b4ad8d2ce65caa0a1dd6cd12b21a1f61981",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/shared/components/textarea/textarea.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextareaComponent } from './textarea.component';\n\n\n\n@NgModule({\n  declarations: [\n    TextareaComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    TextareaComponent\n  ]\n})\nexport class TextareaModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "TextareaComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "TextareaComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "authGuard",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/guards/admin-user.guard.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "() => {\n  const authService = inject(AuthService);\n  const router = inject(Router);\n\n  if (authService.isLoggedIn()) {\n    return true;\n  }\n\n  router.navigate(['/login']);\n  return false;\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/app/guards/admin-user.guard.ts": [
+                {
+                    "name": "authGuard",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/guards/admin-user.guard.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => {\n  const authService = inject(AuthService);\n  const router = inject(Router);\n\n  if (authService.isLoggedIn()) {\n    return true;\n  }\n\n  router.navigate(['/login']);\n  return false;\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "className": "AppModule",
+        "children": [
+            {
+                "name": "routes",
+                "filename": "src/app/app-routing.module.ts",
+                "module": "AppRoutingModule",
+                "children": [
+                    {
+                        "path": "login",
+                        "loadChildren": "./pages/login/login.module#LoginModule",
+                        "children": [
+                            {
+                                "kind": "module",
+                                "children": [
+                                    {
+                                        "name": "routes",
+                                        "filename": "src/app/pages/login/login-routing.module.ts",
+                                        "module": "LoginRoutingModule",
+                                        "children": [
+                                            {
+                                                "path": "",
+                                                "component": "LoginComponent"
+                                            }
+                                        ],
+                                        "kind": "module"
+                                    }
+                                ],
+                                "module": "LoginModule"
+                            }
+                        ]
+                    },
+                    {
+                        "path": "customers",
+                        "loadChildren": "./customers/customers.module#CustomersModule",
+                        "children": [
+                            {
+                                "kind": "module",
+                                "children": [
+                                    {
+                                        "name": "routes",
+                                        "filename": "src/app/customers/customers-routing.module.ts",
+                                        "module": "CustomersRoutingModule",
+                                        "children": [
+                                            {
+                                                "path": "",
+                                                "component": "CustomersComponent"
+                                            },
+                                            {
+                                                "path": "new",
+                                                "component": "CustomersFormComponent"
+                                            },
+                                            {
+                                                "path": "edit/:id",
+                                                "component": "CustomersFormComponent"
+                                            }
+                                        ],
+                                        "kind": "module"
+                                    }
+                                ],
+                                "module": "CustomersModule"
+                            }
+                        ]
+                    },
+                    {
+                        "path": "dashboard",
+                        "loadChildren": "./pages/dashboard/dashboard.module#DashboardModule",
+                        "children": [
+                            {
+                                "kind": "module",
+                                "children": [
+                                    {
+                                        "name": "routes",
+                                        "filename": "src/app/pages/dashboard/dashboard-routing.module.ts",
+                                        "module": "DashboardRoutingModule",
+                                        "children": [
+                                            {
+                                                "path": "",
+                                                "component": "DashboardComponent"
+                                            }
+                                        ],
+                                        "kind": "module"
+                                    }
+                                ],
+                                "module": "DashboardModule"
+                            }
+                        ]
+                    },
+                    {
+                        "path": "schedule-page",
+                        "loadChildren": "./pages/schedule-page/schedule-page.module#SchedulePageModule",
+                        "children": [
+                            {
+                                "kind": "module",
+                                "children": [
+                                    {
+                                        "name": "routes",
+                                        "filename": "src/app/pages/schedule-page/schedule-page-routing.module.ts",
+                                        "module": "SchedulePageRoutingModule",
+                                        "children": [],
+                                        "kind": "module"
+                                    }
+                                ],
+                                "module": "SchedulePageModule"
+                            }
+                        ]
+                    },
+                    {
+                        "path": "",
+                        "redirectTo": "login",
+                        "pathMatch": "full"
+                    },
+                    {
+                        "path": "**",
+                        "redirectTo": "login"
+                    }
+                ],
+                "kind": "module"
+            }
+        ]
+    },
+    "coverage": {
+        "count": 2,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customers/customers-form/customers-form.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CustomersFormComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customers/customers-form/customers-form.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "loginFormInterface",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/customers/customers.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CustomersComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/guards/admin-user.guard.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "authGuard",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/dashboard/dashboard.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DashboardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/login/login.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LoginComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/login/login.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "loginDataInterface",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/schedule-page/schedule-page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SchedulePageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/auth.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "AuthService",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/alert/alert.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AlertComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/button/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/card/card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/fab-card/fab-card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FabCardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/footer/footer.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FooterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/header/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/icon/icon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/input/input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/label/label.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LabelComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/modal/modal.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ModalComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/select/select.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SelectComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/side-menu/side-menu.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SideMenuComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/side-menu/side-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "menuItemInterface",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/textarea/textarea.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TextareaComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/directives/cpf-mask.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "CpfMaskDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/user.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            }
+        ]
+    }
+}

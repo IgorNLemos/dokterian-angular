@@ -1,0 +1,46 @@
+.footer-menu {
+  display: flex;
+  justify-content: space-around;
+  background: #ffffff;
+  padding: 12px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px -2px 7px rgba(0, 0, 0, 0.1);
+
+
+  a {
+    text-decoration: none;
+    color: #888;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    transition: color 0.3s ease-in-out;
+
+    .label {
+      position: absolute;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    &.active {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(99, 180, 255, 0.1);
+      color: #63B4FF;
+
+      .label {
+        position: relative;
+        opacity: 1;
+        transform: translate(0px);
+        margin-left: 5px;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      }
+    }
+  }
+}

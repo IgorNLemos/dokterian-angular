@@ -1,0 +1,27 @@
+<div class="container d-flex flex-column">
+  <header class="top-buttons d-flex justify-content-center align-items-center">
+    <app-button class="secondary" label="Canceled Schedule"></app-button>
+    <app-button class="primary" label="Upcoming Schedule"></app-button>
+    <app-button class="secondary" label="Completed schedule"></app-button>
+  </header>
+  <div class="app-cards d-flex flex-column">
+    <div *ngFor="let appCardItem of appCards" class="d-flex flex-column">
+      <app-card
+      [class]="appCardItem.class"
+      [cardPictureSrc]="appCardItem.cardPictureSrc"
+      [name]="appCardItem.name"
+      [speciality]="appCardItem.speciality"
+      [upRightCardIcon]="appCardItem.upRightCardIcon"
+      [upRightCardLabel]="appCardItem.upRightCardLabel"
+      [leftCardIconName]="appCardItem.leftCardIconName"
+      [rightCardIconName]="appCardItem.rightCardIconName"
+      [leftCardIconLabel]="appCardItem.leftCardIconLabel"
+      [rightCardIconLabel]="appCardItem.rightCardIconLabel"
+      [buttonLabel]="appCardItem.buttonLabel"
+      [showButton]="true"
+      ></app-card>
+    </div>
+  </div>
+</div>
+
+{{ doctor.getName() }}

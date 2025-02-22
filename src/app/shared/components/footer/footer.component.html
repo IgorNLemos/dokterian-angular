@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center">
+  <nav class="footer-menu" role="navigation">
+    <a
+      *ngFor="let item of menuItems"
+      [class.active]="activeItem === item.name"
+      (click)="setActive(item.name)"
+      [routerLink]="item.routerLink"
+      >
+      <app-icon [name]="item.icon" size="24"></app-icon>
+      <span class="label">{{ item.label }}</span>
+    </a>
+  </nav>
+</div>

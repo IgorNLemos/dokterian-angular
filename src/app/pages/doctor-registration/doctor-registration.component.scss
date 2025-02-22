@@ -1,0 +1,36 @@
+.container {
+  height: 100vh;
+  vertical-align: center;
+  text-align: left;
+  padding: 30px;
+  gap: 10px;
+}
+
+
+form {
+  display:flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+app-button {
+  margin-top: 20px;
+  ::ng-deep button {
+    width: 100%;
+  }
+}
+
+app-input {
+  ::ng-deep input {
+    border: 1px solid #4894FE;
+    border-radius: 3px;
+  }
+}
+
+h2 {
+  font-family: "Poppins";
+  font-weight: 600;
+  line-height: 17.6px;
+  text-align: left;
+  margin-top: 10px;
+}

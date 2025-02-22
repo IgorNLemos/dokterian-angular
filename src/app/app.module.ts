@@ -6,11 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FooterModule } from './shared/components/footer/footer.module';
+import { IconModule } from './shared/components/icon/icon.module';
+import { LucideAngularModule, icons } from 'lucide-angular';
+
+
+
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,6 +25,8 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CommonModule,
+    LucideAngularModule.pick( icons ),
+    FooterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

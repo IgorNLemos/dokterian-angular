@@ -1,0 +1,81 @@
+<div class="container d-flex flex-column">
+  <div class="d-flex justify-content-center">
+    <h2>Registration</h2>
+  </div>
+  <form [formGroup]="doctorRegistrationForm" (ngSubmit)="register()">
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="First Name"
+      placeholder="Insert your first name"
+      control="firstName"
+      textError="O nome deve ter pelo menos 3 caracteres."
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="Last name"
+      placeholder="Insert your last name"
+      control="lastName"
+      textError="Last name should have at least 2 caracteres."
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="Birthdate"
+      placeholder="Insert your birthdate (DD/MM/YYYY)"
+      control="birthdate"
+      textError="Insert a valid date in the format DD/MM/YYYY"
+      directive="appBirthdateMask"
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="Email"
+      placeholder="Insert your email"
+      control="email"
+      textError="Insert a valid email in the format email@domain.com"
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="Phone"
+      placeholder="Insert your phone number in the format (xx) 9xxxx-xxxx"
+      control="phone"
+      textError="The phone number should have the DDD and 9 digits."
+      directive="appPhoneMask"
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="Speciality"
+      placeholder="Insert your speciality"
+      control="speciality"
+      textError="Speciality should have at least 3 characters."
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="CRM"
+      placeholder="Insert your CRM in the format CRM-MG 123456"
+      control="crm"
+      textError="Write your crm in the format CRM-MG 123456."
+      directive="appCrmMask"
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="CPF"
+      placeholder="Insert your CPF"
+      control="cpf"
+      textError="The CPF should have 11 numbers."
+      directive="appCpfMask"
+    ></app-input>
+    <app-input
+      [form]="doctorRegistrationForm"
+      label="Address"
+      placeholder="Insert your address"
+      control="address"
+      textError="Address should have at least 3 characters."
+    ></app-input>
+    <app-button
+      class="primary"
+      [label]="'Register'"
+      type="submit"
+      [disabled]="doctorRegistrationForm.invalid"
+      (click)="register()"
+    ></app-button>
+  </form>
+</div>

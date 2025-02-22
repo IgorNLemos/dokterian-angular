@@ -1,0 +1,32 @@
+<div [class]="class">
+  <div class=" d-flex justify-content-around align-items-center gap-1">
+    <div class="id-container">
+      <div class="pic-bg">
+        <img [src]="cardPictureSrc">
+      </div>
+      <div class="ident-text">
+        <div class="name">{{ name }}</div>
+        <div class="speciality">{{ speciality }}</div>
+      </div>
+      <span class="up-right-card-icon d-flex align-items-center gap-1">
+        <app-icon [name]="upRightCardIcon" size="18"></app-icon>
+        {{ upRightCardLabel }}
+      </span>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex justify-content-around text-white">
+    <div class="down-left-card-icon d-flex align-items-center gap-1 date">
+      <app-icon [name]="leftCardIconName" size="18"></app-icon>
+      {{ leftCardIconLabel }}
+    </div>
+    <div class="down-right-card-icon d-flex align-items-center gap-1">
+      <app-icon [name]="rightCardIconName" size="18"></app-icon>
+      {{ rightCardIconLabel }}
+    </div>
+  </div>
+  <div *ngIf="showButton" class="card-button">
+    <app-button class="primary" [label]="buttonLabel"></app-button>
+  </div>
+</div>
+

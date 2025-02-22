@@ -1,0 +1,19 @@
+button {
+  padding: 16px 32px 16px 32px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Poppins';
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 13.2px;
+
+  &.primary {
+    background: rgba(99, 180, 255, 0.1);
+    color: rgba(72, 148, 254, 1);
+  }
+
+  &.secondary {
+    color: rgba(134, 150, 187, 1);
+    background: rgba(250, 250, 250, 1);
+  }
+}

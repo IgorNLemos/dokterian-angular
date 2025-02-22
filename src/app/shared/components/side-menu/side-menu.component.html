@@ -1,0 +1,12 @@
+<nav>
+  <ul>
+    <li
+      *ngFor="let item of menuItems"
+      [routerLink]="item.routerLink"
+      routerLinkActive="{{ item.routerLinkActive }}"
+      [attr.aria-current]="item.ariaCurrentWhenActive"
+    >
+      <a>{{ item.label }}</a>
+    </li>
+  </ul>
+</nav>

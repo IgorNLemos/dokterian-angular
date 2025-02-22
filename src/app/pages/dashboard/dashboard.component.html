@@ -1,0 +1,38 @@
+<div class="container d-flex flex-column">
+  <app-header></app-header>
+  <app-card
+    class="app-card card--next-appointment"
+    cardPictureSrc="assets/image 8.svg"
+    name = 'Dr. Imran Syahir'
+    speciality = 'General Doctor'
+    upRightCardIcon="chevron-right"
+    leftCardIconName="calendar-days"
+    leftCardIconLabel="Sunday, 12 June"
+    rightCardIconName="clock-4"
+    rightCardIconLabel="11:00 - 12:00 AM"
+    [showButton]= false
+  ></app-card>
+  <div class="d-flex justify-content-center">
+    <mat-form-field class="w-100 search-input">
+      <mat-label>Search doctor or health issue</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Digite sua pesquisa" />
+    </mat-form-field>
+  </div>
+  <app-fab-card [fabCardItems]="fabCardItems" iconSize="30"></app-fab-card>
+  <h3>Closest Available Time</h3>
+  <app-card
+    class="app-card card--next-available-spot"
+    cardPictureSrc="assets/image 9.svg"
+    name = 'Dr. Joseph Brostito'
+    speciality = 'Dental Specialist'
+    upRightCardIcon="map-pin"
+    upRightCardLabel="1.2 KM"
+    leftCardIconName="star"
+    leftCardIconLabel="4,8 (120 Reviews)"
+    rightCardIconName="clock-4"
+    rightCardIconLabel="Open at 17.00"
+    [showButton]=false
+  ></app-card>
+
+</div>

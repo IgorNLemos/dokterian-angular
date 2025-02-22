@@ -10,14 +10,13 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { CustomersFormComponent } from './customers-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CpfMaskDirective } from 'src/app/shared/directives/cpf-mask.directive';
+
 
 
 
 @NgModule({
   declarations: [
       CustomersFormComponent,
-      CpfMaskDirective,
     ],
     imports: [
       CommonModule,

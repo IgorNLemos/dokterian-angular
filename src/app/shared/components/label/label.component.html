@@ -1,0 +1,11 @@
+<div class="container" *ngIf="type==='header'">
+  <div class="d-flex flex-column gap-2">
+    <label>{{ text }}</label>
+    <h1>{{ name }}</h1>
+  </div>
+  <div>
+    <img src="assets/Frame.svg">
+  </div>
+</div>
+
+<label *ngIf="type==='normal'">{{ text }}</label>

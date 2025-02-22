@@ -1,0 +1,136 @@
+.app-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  gap: 6px;
+
+  .id-container {
+    display: flex;
+    align-items: center;
+    margin-right: 0px;
+    width: 100%;
+    gap: 8px;
+
+    .name{
+      padding: 10px 0px 0px 0px;
+      font-family: 'Poppins';
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 17.6px;
+      text-align: left;
+    }
+
+    .speciality {
+      font-family: 'Poppins';
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      text-align: left;
+    }
+
+    .up-right-card-icon {
+      font-family: 'Poppins';
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  hr {
+    width: auto;
+    height: 0px;
+    border: 1px;
+  }
+
+  img {
+    object-fit: cover;
+    width: 66px;
+    height: 66px;
+    border-radius: 40px;
+  }
+
+  .pic-bg {
+    height: 66px;
+    border-radius: 40px;
+    background: #e4e4e4;
+    align-content:center
+  }
+}
+
+.card--next-appointment {
+  background-color: #4894FE;
+
+  .name{
+    color: #FFFFFF;
+  }
+
+  .speciality {
+    color: #CBE1FF;
+  }
+
+  hr {
+    border: 1px solid #FFFFFF26
+  }
+
+  .up-right-card-icon {
+    color: #FFFFFF;
+    margin-left: auto;
+  }
+
+  .down-left-card-icon {
+    color: #FFFFFF;
+  }
+
+  .down-right-card-icon {
+    color: #FFFFFF;
+  }
+}
+
+.card--next-available-spot {
+  background-color: #FFFFFF;
+
+
+  .name{
+    color: #0D1B34;
+  }
+
+  .speciality {
+    color: #8696BB;
+  }
+
+  hr {
+    border: 1px solid #d0d0d0
+  }
+
+  .up-right-card-icon {
+    color: #8696BB;
+    margin-left: 15px;
+  }
+
+  .down-left-card-icon {
+    color: #FEB052;
+  }
+
+  .down-right-card-icon {
+    color: #4894FE;
+  }
+
+  box-shadow: 2px 12px 20px 0px rgba(90, 117, 167, 0.05);
+}
+
+.card-button {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+ }
+
+
+
+app-button {
+  width: 100%;
+ & ::ng-deep button {
+  width: 100%;
+ }
+}

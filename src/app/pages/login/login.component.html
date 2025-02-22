@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="content">
+    <div>
+      <img class="logoForm" src="assets/pngwing.com.png">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <app-input
+        [form]="loginForm"
+        control="user"
+        label="Username: "
+        placeholder="Digite o username"
+        type="text"
+      ></app-input>
+      <div *ngIf="loginForm.get('user')?.touched && loginForm.get('user')?.invalid && loginForm.get('user')?.dirty">
+        <small *ngIf="loginForm.get('user')?.errors?.['required']">O username é obrigatório.</small>
+        <small *ngIf="loginForm.get('user')?.errors?.['minlength']">O username deve ter pelo menos 3 characters.</small>
+      </div>
+      <app-input
+        [form]="loginForm"
+        control="password"
+        label="Password: "
+        placeholder="Digite a senha"
+        type="password"
+      ></app-input>
+      <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid && loginForm.get('password')?.dirty">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">A senha é obrigatória.</small>
+      </div>
+    </form>
+    <div class="button-div">
+      <app-button [label]="'Entrar'" [disabled]="loginForm.invalid" type="submit" (click)="login()"></app-button>
+      <app-button [label]="'Limpar'" class="secondary" type="button" (click)="erase()"></app-button>
+    </div>
+  </div>
+</div>

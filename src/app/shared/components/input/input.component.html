@@ -1,0 +1,35 @@
+<div [formGroup]="form">
+  <label>{{ label }}</label>
+  <input matInput *ngIf="directive === undefined"
+    [formControlName]="control"
+    [placeholder]="placeholder"
+    [type]="type"
+  />
+  <input matInput *ngIf="directive === 'appPhoneMask'"
+    [formControlName]="control"
+    [placeholder]="placeholder"
+    [type]="type"
+    appPhoneMask
+  />
+  <input matInput *ngIf="directive === 'appCpfMask'"
+    [formControlName]="control"
+    [placeholder]="placeholder"
+    [type]="type"
+    appCpfMask
+  />
+  <input matInput *ngIf="directive === 'appCrmMask'"
+    [formControlName]="control"
+    [placeholder]="placeholder"
+    [type]="type"
+    appCrmMask
+  />
+  <input matInput *ngIf="directive === 'appBirthdateMask'"
+    [formControlName]="control"
+    [placeholder]="placeholder"
+    [type]="type"
+    appBirthdateMask
+  />
+  <mat-error *ngIf="form.get(control)?.touched && form.get(control)?.invalid">
+    {{ textError }}
+  </mat-error>
+</div>
